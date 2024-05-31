@@ -1,0 +1,16 @@
+name: Discord Notification
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord notification
+        uses: discord/send-message@v1
+        with:
+          webhook-id: ${{ secrets.DISCORD_WEBHOOK_ID }}
+          webhook-token: ${{ secrets.DISCORD_WEBHOOK_TOKEN }}
+          content: "Новий пул-реквест створено: ${{ github.event.pull_request.html_url }}"
